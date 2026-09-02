@@ -1,6 +1,14 @@
 const { Telegraf, Markup } = require('telegraf');
+
 const path = require('path');
 const fs = require('fs');
+const dotenv = require('dotenv').config({
+    path: path.join(__dirname, '.env')
+});
+
+
+const BOT_TOKEN_DATA = process.env.BOT_TOKEN;
+console.log("BOT_TOKEN:", BOT_TOKEN_DATA);
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -18,11 +26,16 @@ bot.start(async (ctx) => {
 📕 Я подготовила для тебя PDF-гайд.
 
 Нажми кнопку ниже, чтобы получить его 👇`,
+
         Markup.inlineKeyboard([
             [
                 Markup.button.callback(
                     '📥 Скачать PDF',
                     'download_pdf'
+                ),
+                Markup.button.url(
+                    '💻 Перейти на сайт',
+                    'https://example.com'
                 )
             ]
         ])
