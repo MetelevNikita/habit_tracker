@@ -26,7 +26,9 @@ const agent = new SocksProxyAgent(
 const BOT_TOKEN_DATA = process.env.BOT_TOKEN;
 console.log("BOT_TOKEN:", BOT_TOKEN_DATA);
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN, {
+    agent: agent
+});
 
 const PDF_PATH = path.join(__dirname, 'habit_tracker.pdf');
 const TITLE_IMAGE = path.join(__dirname, 'title_image.jpeg')
