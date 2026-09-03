@@ -1,10 +1,26 @@
 const { Telegraf, Markup, Input } = require('telegraf');
+const  { SocksProxyAgent } = require("socks-proxy-agent");
 
 const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv').config({
     path: path.join(__dirname, '.env')
 });
+
+
+// proxy
+
+const agent = new SocksProxyAgent(
+  `socks5h://${process.env.PROXY_USER}:${process.env.PROXY_PASSWORD}@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`,
+  {
+    keepAlive: false,
+    timeout: 30000
+  }
+)
+
+
+// 
+
 
 
 const BOT_TOKEN_DATA = process.env.BOT_TOKEN;
